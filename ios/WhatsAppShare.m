@@ -47,6 +47,19 @@ RCT_EXPORT_MODULE();
             [documentInteractionController presentOpenInMenuFromRect:CGRectMake(0, 0, 0, 0) inView:[[[[[UIApplication sharedApplication] delegate] window] rootViewController] view] animated:YES];
             NSLog(@"Done whatsapp movie");
             successCallback(@[]);
+            documentInteractionController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:options[@"url"]]];
+            documentInteractionController.UTI = @"net.whatsapp.image";
+            documentInteractionController.delegate = self;
+            [documentInteractionController presentOpenInMenuFromRect:CGRectMake(0, 0, 0, 0) inView:[[[[[UIApplication sharedApplication] delegate] window] rootViewController] view] animated:YES];
+            NSLog(@"Done whatsapp image");
+            successCallback(@[]);
+        } else if ([options[@"url"] rangeOfString:@"wai"].location != NSNotFound || [options[@"url"] rangeOfString:@"png"].location != NSNotFound || [options[@"url"] rangeOfString:@"jpg"].location != NSNotFound) {
+            documentInteractionController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:options[@"url"]]];
+            documentInteractionController.UTI = @"net.whatsapp.image";
+            documentInteractionController.delegate = self;
+            [documentInteractionController presentOpenInMenuFromRect:CGRectMake(0, 0, 0, 0) inView:[[[[[UIApplication sharedApplication] delegate] window] rootViewController] view] animated:YES];
+            NSLog(@"Done whatsapp image");
+            successCallback(@[]);            
         } else {
             text = (NSString*)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,(CFStringRef) text, NULL,CFSTR("!*'();:@&=+$,/?%#[]"),kCFStringEncodingUTF8));
             
